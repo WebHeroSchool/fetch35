@@ -19,7 +19,7 @@ let getDate = new Promise((resolve, reject) => {
   setTimeout(() => date ? resolve(date) : regect('время не найдено'), 2000);
 });
 
-let dateRequest = fetch(`https://api.github.com/users/${name}`);
+let dateRequest = fetch(`https://api.github.com/users/${getName(url)}`);
 
 Promise.all([dateRequest, getDate])
   .then(([request, date]) => {
@@ -35,27 +35,27 @@ Promise.all([dateRequest, getDate])
 
     let addUserLogin = () => {
       let elForLogin = document.createElement('h3');
-    elForLogin.innerHTML = userlogin;
-    body.insertBefore(elForLogin, lastEl);
+      elForLogin.innerHTML = userLogin;
+      body.appendChild(elForLogin);
     }
 
     let addUserName = () => {
       let elForName = document.createElement('p');
       elForName.innerHTML = userName;
-      body.insertBefore(elForName, lastEl);
+      body.appendChild(elForName);
     }
 
     let addUserBio = () => {
       let elForBio = document.createElement('p');
       elForBio.innerHTML = userBio;
-      body.insertBefore(elForBio, lastEl);
+      body.appendChild(elForBio);
     }
     let addUserAvatar = () => {
       let elForAvatar = document.createElement('img');
       let newString = document.createElement('br');
       elForAvatar.src = userAvatar;
-      body.insertBefore(newString, lastEl);
-      body.insertBefore(elForAvatar, lastEl);
+      body.appendChild(newString);
+      body.appendChild(elForAvatar);
     }
 
     let addUserUrl = () => {
@@ -64,23 +64,25 @@ Promise.all([dateRequest, getDate])
       let newString = document.createElement('br');
       elForUrl.herf = userUrl;
       elForUrl.appendChild(text);
-      body.insertBefore(newString, lastEl);
-      body.insertBefore(elForUrl, lastEl);
+      body.appendChild(newString);
+      body.appendChild(elForUrl);
     }
 
     let addDate = () => {
       let elForDate = document.createElement('p');
       elForDate.innerHTML = requestDate;
-      body.insertBefore(elForDate, lastEl);
+      body.appendChild(elForDate);
     }
 
-    preloader.style.display = 'none';
+ 
     addUserLogin();
     addUserName();
     addUserBio();
     addUserAvatar();
     addUserUrl();
     addDate();
-})
-  
-  .catch(err => alert(err + '\n Информация о пользователе не доступна'));
+    })
+
+  .then(resolve = () => {preloader.style.display = 'none'})
+
+.catch(err => alert(err + '\n Информация о пользователе не доступна')); 
