@@ -34,4 +34,8 @@
   }
   
   .inPreloader div { box-sizing: content-box; }
+
+  .body {
+    margin-left: 35%;
+  }
   

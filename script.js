@@ -29,6 +29,7 @@ Promise.all([dateRequest, getDate])
   .then(res => requestInfo.json())
   .then(showUserInfo => {
     let userLogin = showUserInfo.login;
+    let userName = showUserInfo.name;
     let userAvatar = showUserInfo.avatar_url;
     let userBio = showUserInfo.bio;
     let userUrl = showUserInfo.html_url;
